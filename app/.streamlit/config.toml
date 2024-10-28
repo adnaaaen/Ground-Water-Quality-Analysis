@@ -1,0 +1,15 @@
+[theme]
+primaryColor = '#7792E3'
+
+backgroundColor = 'black'
+
+secondaryBackgroundColor = '#202420'
+
+textColor = '#FFFFFF'
+
+font = "sans serif"
+
+
+
+[client]
+showSidebarNavigation = false
