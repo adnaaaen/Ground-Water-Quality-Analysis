@@ -1,6 +1,5 @@
 import streamlit as st
 from utils import helper
-import numpy as np
 
 # page configurations
 st.set_page_config(page_title="Predict | Water Quality Analysis")
@@ -42,9 +41,38 @@ st.session_state.hardness=""
 st.session_state.quality=""
 
 is_random_data = st.button("Generate Random data")
+
 if is_random_data:
-    st.session_state.name = "Adnan"
-    st.session_state.age = int(np.random.randint(10,100,size=1))
+    st.session_state.state = helper.get_random_catagory("STATE")
+    st.session_state.district = helper.get_random_district_by_state(st.session_state.state)
+    st.session_state.hardness = helper.get_random_catagory("HARDNESS")
+    st.session_state.quality = helper.get_random_catagory("QUALITY")
+    st.session_state.ph = helper.get_random_num(4.36, 9.73)
+    st.session_state.ec = helper.get_random_num(0.0, 5480.0)
+
+    st.session_state.co3 = helper.get_random_num(0.0, 104.0)
+    st.session_state.hco3 = helper.get_random_num(0.0, 1464.0)
+
+    st.session_state.cl = helper.get_random_num(0.0, 1156.0)
+    st.session_state.so4 = helper.get_random_num(0.0, 547.0)
+    
+    st.session_state.no3 = helper.get_random_num(0.0, 264.0)
+    st.session_state.po4 = helper.get_random_num(0.0, 0.240)
+
+    st.session_state.th = helper.get_random_num(0.0, 1600.0)
+    st.session_state.ca = helper.get_random_num(0.0, 337.0)
+
+    st.session_state.mg = helper.get_random_num(-23.0, 222.0)
+    st.session_state.na = helper.get_random_num(0.0, 763.0)
+
+    st.session_state.k = helper.get_random_num(0.0, 68.87)
+    st.session_state.f = helper.get_random_num(0.0, 3.9)
+
+    st.session_state.sio2 = helper.get_random_num(0.0, 82.0)
+    st.session_state.tds = helper.get_random_num(0.0, 2301.0)
+
+
+
 
 with st.form("model-prediction"):
 
