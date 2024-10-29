@@ -1,3 +1,7 @@
-from utils import helpers
+import streamlit as st
+from utils import helper
 
-helpers.get_page_link()
+# page configurations
+st.set_page_config(page_title="Insights | Water Quality Analysis")
+
+helper.get_page_link()
