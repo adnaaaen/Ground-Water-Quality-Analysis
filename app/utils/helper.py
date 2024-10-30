@@ -1,8 +1,6 @@
 import os
 from typing import Any
 import joblib
-from matplotlib.pylab import rand
-from streamlit import page_link, sidebar, cache_data
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -11,19 +9,40 @@ import numpy as np
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-def get_page_link() -> None:
-    with sidebar:
-        page_link("main.py", label="Home", icon=":material/home:")
-        page_link("pages/insights.py", label="Insights", icon=":material/analytics:")
-        page_link("pages/predict.py", label="Predict", icon=":material/psychology:")
+def create_sidebar() -> list:
+    return [
+        {
+            "label": "Home",
+            "page": "main.py",
+            "icon": ":material/home:",
+        },
+        {
+            "label": "Insights",
+            "page": "pages/insights.py",
+            "icon": ":material/monitoring:",
+        },
+        {
+            "label": "Model",
+            "page": "pages/model.py",
+            "icon": ":material/science:",
+        },
+        {
+            "label": "Predict",
+            "page": "pages/predict.py",
+            "icon": ":material/psychology:",
+        },
+        {
+            "label": "About",
+            "page": "pages/about.py",
+            "icon": ":material/info:",
+        },
+    ]
 
 
-@cache_data()
 def convert_df(df: pd.DataFrame) -> Any:
     return df.to_csv().encode("utf-8")
 
 
-@cache_data()
 def get_df() -> pd.DataFrame:
     df_path = os.path.join(PROJECT_DIR, "data/preprocessed.csv")
     return pd.read_csv(df_path)
@@ -31,6 +50,19 @@ def get_df() -> pd.DataFrame:
 
 df = get_df()
 STATE = df.groupby("STATE")["DISTRICT"].unique().to_dict()
+
+
+def get_values_by_locality(state: str, district: str) -> pd.DataFrame:
+    state_filter = df["STATE"] == state
+    district_filter = df["DISTRICT"] == district
+    result_df = df[state_filter & district_filter][
+        ["pH", "TDS", "EC", "NO3", "Cl", "HARDNESS", "QUALITY"]
+    ]
+    return result_df
+
+
+def get_unique_values(column: str) -> list[str]:
+    return list(df[column].unique())
 
 
 def get_random_category(column: str) -> str:
@@ -43,6 +75,7 @@ def get_random_district_by_state(state: str) -> str:
 
 def get_random_num(start: float, end: float) -> float:
     return round(np.random.uniform(start, end), 5)
+
 
 def get_coordinates_by_district(district: str) -> tuple[float, float]:
     """generate coordinates by given district which included in dataset

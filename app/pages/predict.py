@@ -1,11 +1,25 @@
-from numpy import place
+from time import sleep
 import streamlit as st
 from utils import helper
 
 # page configurations
-st.set_page_config(page_title="Predict | Water Quality Analysis", layout="wide")
+st.set_page_config(
+    page_title="Predict | Water Quality ",
+    page_icon="💧",
+    layout="wide",
+)
+sidebar_content = helper.create_sidebar()
 
-helper.get_page_link()
+with st.sidebar:
+    for item in sidebar_content:
+        st.page_link(page=item["page"], label=item["label"], icon=item["icon"])
+
+
+st.markdown("## **WATER QUALITY PREDICTION MODEL**")
+st.divider()
+
+
+
 st.session_state.state = None
 st.session_state.district = None
 
@@ -39,7 +53,7 @@ st.session_state.tds = None
 st.session_state.hardness = None
 st.session_state.quality = None
 
-is_random_data = st.button("Generate Random data")
+is_random_data = st.button("Generate Random Data")
 
 if is_random_data:
     st.session_state.state = helper.get_random_category("STATE")
@@ -131,3 +145,14 @@ with st.form("model-prediction"):
 
     # Submit button for form
     btn = st.form_submit_button("Predict Water Quality", use_container_width=True)
+    if btn:
+        with st.status("Predicting Quality", expanded=True) as status:
+            st.write("data preprocessing")
+            sleep(2)
+            st.write("data sending")
+            sleep(3)
+            st.write("model evaluating")
+            sleep(3)
+            st.write("predicting...")
+            sleep(3)
+            status.update(label="Model Predicted Successfully",expanded=False)
