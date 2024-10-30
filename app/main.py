@@ -45,8 +45,3 @@ with two:
 with three:
     st.metric(label="Numerical Features", value=len(df.select_dtypes(include=np.number).columns))
     st.metric(label="No.of Districts", value=df['DISTRICT'].nunique())
-
-
-
-
-

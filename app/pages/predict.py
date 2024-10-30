@@ -1,52 +1,58 @@
+from numpy import place
 import streamlit as st
 from utils import helper
 
 # page configurations
-st.set_page_config(page_title="Predict | Water Quality Analysis")
+st.set_page_config(page_title="Predict | Water Quality Analysis", layout="wide")
 
 helper.get_page_link()
+st.session_state.state = None
+st.session_state.district = None
 
+st.session_state.latitude = None
+st.session_state.longitude = None
 
-st.session_state.state=""
-st.session_state.district=""
+st.session_state.ph = None
+st.session_state.ec = None
 
-st.session_state.latitude=0
-st.session_state.longitude=0
+st.session_state.co3 = None
+st.session_state.hco3 = None
 
-st.session_state.ph=0
-st.session_state.ec=0
+st.session_state.cl = None
+st.session_state.so4 = None
 
-st.session_state.co3=0
-st.session_state.hco3=0
+st.session_state.no3 = None
+st.session_state.po4 = None
 
-st.session_state.cl=0
-st.session_state.so4=0
+st.session_state.th = None
+st.session_state.ca = None
 
-st.session_state.no3=0
-st.session_state.po4=0
+st.session_state.mg = None
+st.session_state.na = None
 
-st.session_state.th=0
-st.session_state.ca=0
+st.session_state.k = None
+st.session_state.f = None
 
-st.session_state.mg=0
-st.session_state.na=0
+st.session_state.sio2 = None
+st.session_state.tds = None
 
-st.session_state.k=0
-st.session_state.f=0
-
-st.session_state.sio2=0
-st.session_state.tds=0
-
-st.session_state.hardness=""
-st.session_state.quality=""
+st.session_state.hardness = None
+st.session_state.quality = None
 
 is_random_data = st.button("Generate Random data")
 
 if is_random_data:
-    st.session_state.state = helper.get_random_catagory("STATE")
-    st.session_state.district = helper.get_random_district_by_state(st.session_state.state)
-    st.session_state.hardness = helper.get_random_catagory("HARDNESS")
-    st.session_state.quality = helper.get_random_catagory("QUALITY")
+    st.session_state.state = helper.get_random_category("STATE")
+    st.session_state.district = helper.get_random_district_by_state(
+        st.session_state.state
+    )
+
+    st.session_state.latitude, st.session_state.longitude = (
+        helper.get_coordinates_by_district(st.session_state.district)
+    )
+
+    st.session_state.hardness = helper.get_random_category("HARDNESS")
+    st.session_state.quality = helper.get_random_category("QUALITY")
     st.session_state.ph = helper.get_random_num(4.36, 9.73)
     st.session_state.ec = helper.get_random_num(0.0, 5480.0)
 
@@ -55,7 +61,7 @@ if is_random_data:
 
     st.session_state.cl = helper.get_random_num(0.0, 1156.0)
     st.session_state.so4 = helper.get_random_num(0.0, 547.0)
-    
+
     st.session_state.no3 = helper.get_random_num(0.0, 264.0)
     st.session_state.po4 = helper.get_random_num(0.0, 0.240)
 
@@ -72,38 +78,56 @@ if is_random_data:
     st.session_state.tds = helper.get_random_num(0.0, 2301.0)
 
 
-
-
 with st.form("model-prediction"):
+    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
-    left, middle, right = st.columns(3)
-    with left:
-        state = st.text_input("State", value=st.session_state.state)
-        district = st.text_input("District", value=st.session_state.district)
-        latitude = st.number_input("Latitude", value=st.session_state.latitude)
-        longitude = st.number_input("Longitude", value=st.session_state.longitude)
-        ph = st.number_input("pH", value=st.session_state.ph)
-        ec = st.number_input("EC", value=st.session_state.ec)
-        co3 = st.number_input("CO3", value=st.session_state.co3)
-        quality = st.text_input("Quality", value=st.session_state.quality)
+    with col1:
+        state = st.text_input(
+            "State", value=st.session_state.state, placeholder="e.g. Kerala"
+        )
+        cl = st.number_input("CL", value=st.session_state.cl, placeholder="0")
+        ca = st.number_input("Ca", value=st.session_state.ca, placeholder="0")
+        k = st.number_input("K", value=st.session_state.k, placeholder="0")
 
-    with middle:
-        hco3 = st.number_input("HCO3", value=st.session_state.hco3)
-        cl = st.number_input("CL", value=st.session_state.cl)
-        so4 = st.number_input("SO4", value=st.session_state.so4)
-        no3 = st.number_input("NO3", value=st.session_state.no3)
-        po4 = st.number_input("PO4", value=st.session_state.po4)
-        th = st.number_input("TH", value=st.session_state.th)
-        ca = st.number_input("Ca", value=st.session_state.ca)
+    with col2:
+        district = st.text_input(
+            "District", value=st.session_state.district, placeholder="e.g. Malappuram"
+        )
+        ph = st.number_input("pH", value=st.session_state.ph, placeholder="0")
+        ec = st.number_input("EC", value=st.session_state.ec, placeholder="0")
 
-    with right:
-        mg = st.number_input("Mg", value=st.session_state.mg)
-        na = st.number_input("Na", value=st.session_state.na)
-        k = st.number_input("K", value=st.session_state.k)
-        f = st.number_input("F", value=st.session_state.f)
-        sio2 = st.number_input("SiO2", value=st.session_state.sio2)
-        tds = st.number_input("TDS", value=st.session_state.tds)
-        hardness = st.text_input("Hardness", value=st.session_state.hardness)
+    with col3:
+        longitude = st.number_input(
+            "Longitude", value=st.session_state.longitude, placeholder="0"
+        )
+        co3 = st.number_input("CO3", value=st.session_state.co3, placeholder="0")
+        hco3 = st.number_input("HCO3", value=st.session_state.hco3, placeholder="0")
 
+    with col4:
+        latitude = st.number_input(
+            "Latitude", value=st.session_state.latitude, placeholder="0"
+        )
+        so4 = st.number_input("SO4", value=st.session_state.so4, placeholder="0")
+        no3 = st.number_input("NO3", value=st.session_state.no3, placeholder="0")
 
-    btn = st.form_submit_button("Predict")
+    with col5:
+        quality = st.text_input(
+            "Quality", value=st.session_state.quality, placeholder="e.g. Safe"
+        )
+        po4 = st.number_input("PO4", value=st.session_state.po4, placeholder="0")
+        th = st.number_input("TH", value=st.session_state.th, placeholder="0")
+
+    with col6:
+        hardness = st.text_input(
+            "Hardness", value=st.session_state.hardness, placeholder="e.g. Soft"
+        )
+        mg = st.number_input("Mg", value=st.session_state.mg, placeholder="0")
+        na = st.number_input("Na", value=st.session_state.na, placeholder="0")
+
+    with col7:
+        f = st.number_input("F", value=st.session_state.f, placeholder="0")
+        sio2 = st.number_input("SiO2", value=st.session_state.sio2, placeholder="0")
+        tds = st.number_input("TDS", value=st.session_state.tds, placeholder="0")
+
+    # Submit button for form
+    btn = st.form_submit_button("Predict Water Quality", use_container_width=True)
