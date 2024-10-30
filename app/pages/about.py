@@ -1,4 +1,3 @@
-from utils import helper
 import streamlit as st
 
 st.set_page_config(
@@ -6,6 +5,7 @@ st.set_page_config(
     page_icon="💧",
     layout="wide",
 )
+from utils import helper
 
 sidebar_content = helper.create_sidebar()
 
@@ -14,5 +14,5 @@ with st.sidebar:
         st.page_link(page=item["page"], label=item["label"], icon=item["icon"])
 
 
-st.write("This from about page")
-st.sidebar.write("this is from about page sidebar")
+st.markdown("# **ABOUT**")
+st.divider()

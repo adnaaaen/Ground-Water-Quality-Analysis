@@ -1,10 +1,9 @@
 import os
 import joblib
-from pathlib import Path
 import helper
 
 
-def generate_coordinate_joblib(file_path: Path) -> None:
+def generate_coordinate_joblib(file_path: str) -> None:
     """generate coordinate binary file from dataset, key=> district
 
     Args:

@@ -4,6 +4,7 @@ import joblib
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import streamlit as st
 
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
@@ -43,6 +44,7 @@ def convert_df(df: pd.DataFrame) -> Any:
     return df.to_csv().encode("utf-8")
 
 
+@st.cache_data
 def get_df() -> pd.DataFrame:
     df_path = os.path.join(PROJECT_DIR, "data/preprocessed.csv")
     return pd.read_csv(df_path)
@@ -56,7 +58,7 @@ def get_values_by_locality(state: str, district: str) -> pd.DataFrame:
     state_filter = df["STATE"] == state
     district_filter = df["DISTRICT"] == district
     result_df = df[state_filter & district_filter][
-        ["pH", "TDS", "EC", "NO3", "Cl", "HARDNESS", "QUALITY"]
+        ["pH", "TDS", "EC", "NO3", "Cl", "TH", "SO4", "Ca", "HARDNESS", "QUALITY"]
     ]
     return result_df
 

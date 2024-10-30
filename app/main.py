@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-from utils import helper
 
 st.set_page_config(
     page_title="Home | Water Quality ",
@@ -8,6 +7,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+from utils import helper
+
 sidebar_content = helper.create_sidebar()
 
 with st.sidebar:
@@ -15,7 +16,8 @@ with st.sidebar:
         st.page_link(page=item["page"], label=item["label"], icon=item["icon"])
 
 
-st.markdown("## **Ground Water Quality Analysis**")
+st.markdown("# **GROUND WATER QUALITY ANALYSIS**")
+st.divider()
 
 
 st.markdown("#### **Objective**")

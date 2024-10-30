@@ -1,6 +1,5 @@
 from time import sleep
 import streamlit as st
-from utils import helper
 
 # page configurations
 st.set_page_config(
@@ -8,6 +7,8 @@ st.set_page_config(
     page_icon="💧",
     layout="wide",
 )
+from utils import helper
+
 sidebar_content = helper.create_sidebar()
 
 with st.sidebar:
@@ -15,9 +16,8 @@ with st.sidebar:
         st.page_link(page=item["page"], label=item["label"], icon=item["icon"])
 
 
-st.markdown("## **WATER QUALITY PREDICTION MODEL**")
+st.markdown("# **WATER QUALITY PREDICTION MODEL**")
 st.divider()
-
 
 
 st.session_state.state = None
@@ -155,4 +155,4 @@ with st.form("model-prediction"):
             sleep(3)
             st.write("predicting...")
             sleep(3)
-            status.update(label="Model Predicted Successfully",expanded=False)
+            status.update(label="Model Predicted Successfully", expanded=False)
