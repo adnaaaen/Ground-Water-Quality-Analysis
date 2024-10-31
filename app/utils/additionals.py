@@ -10,7 +10,7 @@ def generate_coordinate_joblib(file_path: str) -> None:
         file_path (Path): fle path to store the binary file
     """
 
-    df = helper.get_df()
+    df = helper.get_df("preprocessed.csv")
     coordinates = {}
     districts = df["DISTRICT"].unique()
     for each in districts:

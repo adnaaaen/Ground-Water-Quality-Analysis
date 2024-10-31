@@ -34,9 +34,9 @@ This dataset, titled "Ground Water Quality 2021," provides comprehensive informa
 st.write(dataset_caption)
 
 # about dataset
-st.caption("Sample Rows")
+st.caption("Sample Data")
 
-df = helper.get_df()
+df = helper.get_df("preprocessed.csv")
 
 st.write(df.sample(5))
 # download dataset

@@ -23,19 +23,9 @@ def create_sidebar() -> list:
             "icon": ":material/monitoring:",
         },
         {
-            "label": "Model",
-            "page": "pages/model.py",
-            "icon": ":material/science:",
-        },
-        {
             "label": "Predict",
             "page": "pages/predict.py",
             "icon": ":material/psychology:",
-        },
-        {
-            "label": "About",
-            "page": "pages/about.py",
-            "icon": ":material/info:",
         },
     ]
 
@@ -45,12 +35,12 @@ def convert_df(df: pd.DataFrame) -> Any:
 
 
 @st.cache_data
-def get_df() -> pd.DataFrame:
-    df_path = os.path.join(PROJECT_DIR, "data/preprocessed.csv")
+def get_df(name: str) -> pd.DataFrame:
+    df_path = os.path.join(PROJECT_DIR, f"data/{name}")
     return pd.read_csv(df_path)
 
 
-df = get_df()
+df = get_df("preprocessed.csv")
 STATE = df.groupby("STATE")["DISTRICT"].unique().to_dict()
 
 

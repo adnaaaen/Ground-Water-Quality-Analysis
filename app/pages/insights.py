@@ -1,4 +1,3 @@
-from curses import use_default_colors
 import numpy as np
 import streamlit as st
 import plotly.express as px
@@ -136,5 +135,5 @@ with tab2:
         options=helper.df.select_dtypes(include=np.number).columns,
         default=["pH", "Cl", "TDS"],
     )
-    corr_fig = px.imshow(helper.df[seleted_cols].corr())
+    corr_fig = px.imshow(helper.df[seleted_cols].corr(), text_auto=True)
     st.plotly_chart(corr_fig)
