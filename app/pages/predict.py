@@ -20,38 +20,39 @@ st.markdown("# **WATER QUALITY PREDICTION MODEL**")
 st.divider()
 
 
-st.session_state.state = None
-st.session_state.district = None
+if "state" not in st.session_state:
+    st.session_state.state = None
+    st.session_state.district = None
 
-st.session_state.latitude = None
-st.session_state.longitude = None
+    st.session_state.latitude = None
+    st.session_state.longitude = None
 
-st.session_state.ph = None
-st.session_state.ec = None
+    st.session_state.ph = None
+    st.session_state.ec = None
 
-st.session_state.co3 = None
-st.session_state.hco3 = None
+    st.session_state.co3 = None
+    st.session_state.hco3 = None
 
-st.session_state.cl = None
-st.session_state.so4 = None
+    st.session_state.cl = None
+    st.session_state.so4 = None
 
-st.session_state.no3 = None
-st.session_state.po4 = None
+    st.session_state.no3 = None
+    st.session_state.po4 = None
 
-st.session_state.th = None
-st.session_state.ca = None
+    st.session_state.th = None
+    st.session_state.ca = None
 
-st.session_state.mg = None
-st.session_state.na = None
+    st.session_state.mg = None
+    st.session_state.na = None
 
-st.session_state.k = None
-st.session_state.f = None
+    st.session_state.k = None
+    st.session_state.f = None
 
-st.session_state.sio2 = None
-st.session_state.tds = None
+    st.session_state.sio2 = None
+    st.session_state.tds = None
 
-st.session_state.hardness = None
-st.session_state.quality = None
+    st.session_state.hardness = None
+    st.session_state.quality = None
 
 is_random_data = st.button("Generate Random Data")
 
@@ -146,13 +147,40 @@ with st.form("model-prediction"):
     # Submit button for form
     btn = st.form_submit_button("Predict Water Quality", use_container_width=True)
     if btn:
-        with st.status("Predicting Quality", expanded=True) as status:
-            st.write("data preprocessing")
+        # Collect all input fields into a dictionary
+        all_inputs = {
+            "State": state,
+            "CL": cl,
+            "Ca": ca,
+            "K": k,
+            "District": district,
+            "pH": ph,
+            "EC": ec,
+            "Longitude": longitude,
+            "CO3": co3,
+            "HCO3": hco3,
+            "Latitude": latitude,
+            "SO4": so4,
+            "NO3": no3,
+            "Quality": quality,
+            "PO4": po4,
+            "TH": th,
+            "Hardness": hardness,
+            "Mg": mg,
+            "Na": na,
+            "F": f,
+            "SiO2": sio2,
+            "TDS": tds,
+        }
+
+        # Display the collected inputs dictionary
+        st.write("All Inputs:", all_inputs)
+
+        with st.status("Predicting water quality...", expanded=True) as status:
+            st.write("transforming data...")
             sleep(2)
-            st.write("data sending")
+            st.write("predicting quality...")
             sleep(3)
-            st.write("model evaluating")
+            st.write("evaluating prediction...")
             sleep(3)
-            st.write("predicting...")
-            sleep(3)
-            status.update(label="Model Predicted Successfully", expanded=False)
+            status.update(label="Prediction Successful", expanded=False)
