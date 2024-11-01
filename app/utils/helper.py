@@ -1,13 +1,8 @@
-import os
 from typing import Any
-import joblib
-from pathlib import Path
 import pandas as pd
 import numpy as np
 import streamlit as st
-
-
-PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
+from .config import DF_PATH, COORDINATES
 
 
 def create_sidebar() -> list:
@@ -36,8 +31,7 @@ def convert_df(df: pd.DataFrame) -> Any:
 
 @st.cache_data
 def get_df(name: str) -> pd.DataFrame:
-    df_path = os.path.join(PROJECT_DIR, f"data/{name}")
-    return pd.read_csv(df_path)
+    return pd.read_csv(f"{DF_PATH}/{name}")
 
 
 df = get_df("preprocessed.csv")
@@ -77,11 +71,8 @@ def get_coordinates_by_district(district: str) -> tuple[float, float]:
     Returns:
         tuple[float, float]: latitude, longitude
     """
-    file_path = os.path.join(PROJECT_DIR, "app/utils/bin/coordinates.joblib")
-    coordinates = joblib.load(file_path)
-
-    longitudes = coordinates[district]["LONGITUDE"]
-    latitudes = coordinates[district]["LATITUDE"]
+    longitudes = COORDINATES[district]["LONGITUDE"]
+    latitudes = COORDINATES[district]["LATITUDE"]
 
     rand_longitude = np.random.choice(longitudes)
     rand_latitude = np.random.choice(latitudes)

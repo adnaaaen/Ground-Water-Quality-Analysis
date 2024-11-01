@@ -1,5 +1,6 @@
 from time import sleep
 import streamlit as st
+from utils.model_predict import predict, ModelParams
 
 # page configurations
 st.set_page_config(
@@ -52,7 +53,6 @@ if "state" not in st.session_state:
     st.session_state.tds = None
 
     st.session_state.hardness = None
-    st.session_state.quality = None
 
 is_random_data = st.button("Generate Random Data")
 
@@ -67,7 +67,6 @@ if is_random_data:
     )
 
     st.session_state.hardness = helper.get_random_category("HARDNESS")
-    st.session_state.quality = helper.get_random_category("QUALITY")
     st.session_state.ph = helper.get_random_num(4.36, 9.73)
     st.session_state.ec = helper.get_random_num(0.0, 5480.0)
 
@@ -102,7 +101,6 @@ with st.form("model-prediction"):
         )
         cl = st.number_input("CL", value=st.session_state.cl, placeholder="0")
         ca = st.number_input("Ca", value=st.session_state.ca, placeholder="0")
-        k = st.number_input("K", value=st.session_state.k, placeholder="0")
 
     with col2:
         district = st.text_input(
@@ -126,9 +124,7 @@ with st.form("model-prediction"):
         no3 = st.number_input("NO3", value=st.session_state.no3, placeholder="0")
 
     with col5:
-        quality = st.text_input(
-            "Quality", value=st.session_state.quality, placeholder="e.g. Safe"
-        )
+        k = st.number_input("K", value=st.session_state.k, placeholder="0")
         po4 = st.number_input("PO4", value=st.session_state.po4, placeholder="0")
         th = st.number_input("TH", value=st.session_state.th, placeholder="0")
 
@@ -148,33 +144,34 @@ with st.form("model-prediction"):
     btn = st.form_submit_button("Predict Water Quality", use_container_width=True)
     if btn:
         # Collect all input fields into a dictionary
-        all_inputs = {
-            "State": state,
-            "CL": cl,
-            "Ca": ca,
-            "K": k,
-            "District": district,
-            "pH": ph,
-            "EC": ec,
-            "Longitude": longitude,
-            "CO3": co3,
-            "HCO3": hco3,
-            "Latitude": latitude,
-            "SO4": so4,
-            "NO3": no3,
-            "Quality": quality,
-            "PO4": po4,
-            "TH": th,
-            "Hardness": hardness,
-            "Mg": mg,
-            "Na": na,
-            "F": f,
-            "SiO2": sio2,
-            "TDS": tds,
-        }
+        all_inputs = ModelParams(
+            state=state,
+            cl=cl,
+            ca=ca,
+            k=k,
+            district=district,
+            ph=ph,
+            ec=ec,
+            longitude=longitude,
+            co3=co3,
+            hco3=hco3,
+            latitude=latitude,
+            so4=so4,
+            no3=no3,
+            po4=po4,
+            th=th,
+            hardness=hardness,
+            mg=mg,
+            na=na,
+            f=f,
+            sio2=sio2,
+            tds=tds,
+        )
 
         # Display the collected inputs dictionary
         st.write("All Inputs:", all_inputs)
+
+        predict(all_inputs)
 
         with st.status("Predicting water quality...", expanded=True) as status:
             st.write("transforming data...")
