@@ -45,6 +45,7 @@ The **Ground Water Quality Analysis** project aims to assess and predict water q
    ```bash
    pip install -r requirements.txt
    ```
+
 - Run the Streamlit application:
    ```bash
    streamlit run app/main.py
@@ -53,3 +54,14 @@ The **Ground Water Quality Analysis** project aims to assess and predict water q
 ## Formatting
 
 The code is formatted using [Black](https://black.readthedocs.io/en/stable/) to ensure consistency and readability.
+```bash
+pip install black
+```
+```bash
+black .
+```
+
+## Screenshot
+
+![Untitled design (1)](https://github.com/user-attachments/assets/0a3bb765-dd37-48fd-a455-8127f42b0802)
+
