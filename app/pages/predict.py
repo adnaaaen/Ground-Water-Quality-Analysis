@@ -1,6 +1,5 @@
 from time import sleep
 import streamlit as st
-from utils.model_predict import predict, ModelParams
 
 # page configurations
 st.set_page_config(
@@ -8,6 +7,7 @@ st.set_page_config(
     page_icon="💧",
     layout="wide",
 )
+from utils.model_predict import predict, ModelParams
 from utils import helper
 
 sidebar_content = helper.create_sidebar()
@@ -24,9 +24,6 @@ st.divider()
 if "state" not in st.session_state:
     st.session_state.state = None
     st.session_state.district = None
-
-    st.session_state.latitude = None
-    st.session_state.longitude = None
 
     st.session_state.ph = None
     st.session_state.ec = None
@@ -60,10 +57,6 @@ if is_random_data:
     st.session_state.state = helper.get_random_category("STATE")
     st.session_state.district = helper.get_random_district_by_state(
         st.session_state.state
-    )
-
-    st.session_state.latitude, st.session_state.longitude = (
-        helper.get_coordinates_by_district(st.session_state.district)
     )
 
     st.session_state.hardness = helper.get_random_category("HARDNESS")
@@ -110,18 +103,14 @@ with st.form("model-prediction"):
         ec = st.number_input("EC", value=st.session_state.ec, placeholder="0")
 
     with col3:
-        longitude = st.number_input(
-            "Longitude", value=st.session_state.longitude, placeholder="0"
-        )
         co3 = st.number_input("CO3", value=st.session_state.co3, placeholder="0")
         hco3 = st.number_input("HCO3", value=st.session_state.hco3, placeholder="0")
+        tds = st.number_input("TDS", value=st.session_state.tds, placeholder="0")
 
     with col4:
-        latitude = st.number_input(
-            "Latitude", value=st.session_state.latitude, placeholder="0"
-        )
         so4 = st.number_input("SO4", value=st.session_state.so4, placeholder="0")
         no3 = st.number_input("NO3", value=st.session_state.no3, placeholder="0")
+        na = st.number_input("Na", value=st.session_state.na, placeholder="0")
 
     with col5:
         k = st.number_input("K", value=st.session_state.k, placeholder="0")
@@ -133,12 +122,10 @@ with st.form("model-prediction"):
             "Hardness", value=st.session_state.hardness, placeholder="e.g. Soft"
         )
         mg = st.number_input("Mg", value=st.session_state.mg, placeholder="0")
-        na = st.number_input("Na", value=st.session_state.na, placeholder="0")
 
     with col7:
         f = st.number_input("F", value=st.session_state.f, placeholder="0")
         sio2 = st.number_input("SiO2", value=st.session_state.sio2, placeholder="0")
-        tds = st.number_input("TDS", value=st.session_state.tds, placeholder="0")
 
     # Submit button for form
     btn = st.form_submit_button("Predict Water Quality", use_container_width=True)
@@ -147,8 +134,6 @@ with st.form("model-prediction"):
         all_inputs = ModelParams(
             state=state,
             district=district,
-            latitude=latitude,
-            longitude=longitude,
             ph=ph,
             ec=ec,
             co3=co3,

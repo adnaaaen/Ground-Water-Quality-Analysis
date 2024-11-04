@@ -2,7 +2,7 @@ from typing import Any
 import pandas as pd
 import numpy as np
 import streamlit as st
-from .config import DF_PATH, COORDINATES
+from .config import DF_PATH
 
 
 def create_sidebar() -> list:
@@ -60,21 +60,9 @@ def get_random_district_by_state(state: str) -> str:
 
 
 def get_random_num(start: float, end: float) -> float:
-    return round(np.random.uniform(start, end), 5)
+    return round(np.random.uniform(start * 1.05, end * 0.95), 5)
 
-
-def get_coordinates_by_district(district: str) -> tuple[float, float]:
-    """generate coordinates by given district which included in dataset
-
-    Args:
-        district (str): district available also in dataset
-    Returns:
-        tuple[float, float]: latitude, longitude
-    """
-    longitudes = COORDINATES[district]["LONGITUDE"]
-    latitudes = COORDINATES[district]["LATITUDE"]
-
-    rand_longitude = np.random.choice(longitudes)
-    rand_latitude = np.random.choice(latitudes)
-
-    return (rand_latitude, rand_longitude)
+def get_normal_num(column: str) -> float:
+    _mean = df[column].mean()
+    _std = df[column].sd()
+    return round(np.random.normal(_mean, _std), 5)

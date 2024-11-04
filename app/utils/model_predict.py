@@ -16,8 +16,6 @@ from dataclasses import dataclass, asdict
 class ModelParams:
     state: str | None
     district: str | None
-    latitude: float | Any | None
-    longitude: float | Any | None
     ph: float | Any | None
     ec: float | Any | None
     co3: float | Any | None
@@ -64,26 +62,29 @@ def predict(params: ModelParams) -> Any:
     print("Default Values: ")
     print(list_values)
 
-    list_values[0], list_values[1], list_values[-1] = label_encode(_state, _district, _hardness) 
+    list_values[0], list_values[1], list_values[-1] = label_encode(
+        _state, _district, _hardness
+    )
 
     print("Encoded Values: ")
     print(list_values)
 
     np_array = np.array(list_values)
-    
-    scaled_values = STANDARD_SCALER.transform(np_array.reshape(1,-1))
+
+    scaled_values = STANDARD_SCALER.transform(np_array.reshape(1, -1))
 
     print("Scaled Values: ")
     print(scaled_values)
 
     df_x = pd.DataFrame(scaled_values, columns=df.columns[:-1])
-    y_pred = MODEL.predict(df_x)
+    y_pred = MODEL.predict(df_x)[0]
+    print(y_pred)
 
     if y_pred == 0:
         print("Moderately Safe")
     elif y_pred == 1:
-         # return "Safe"
-         print("Safe")
+        # return "Safe"
+        print("Safe")
     elif y_pred == 2:
         # return "Unsafe"
         print("Unsafe")
