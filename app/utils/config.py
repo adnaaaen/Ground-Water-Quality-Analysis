@@ -12,8 +12,10 @@ DF_PATH = os.path.join(PROJECT_DIR, "data")
 STANDARD_SCALER = joblib.load(os.path.join(BINARY_DIR, "standard_scaler.joblib"))
 COORDINATES = joblib.load(os.path.join(BINARY_DIR, "coordinates.joblib"))
 
-# TODO
-# LABEL_ENCODER = ""
+# TODO: Label encoder 
+DISTRICT_ENCODER = joblib.load(os.path.join(BINARY_DIR, "encoders/district.joblib"))
+STATE_ENCODER = joblib.load(os.path.join(BINARY_DIR, "encoders/state.joblib"))
+HARDNESS_ENCODER = joblib.load(os.path.join(BINARY_DIR, "encoders/hardness.joblib"))
 
 
 MODEL = joblib.load(os.path.join(PROJECT_DIR, "model/model.joblib"))

@@ -146,26 +146,26 @@ with st.form("model-prediction"):
         # Collect all input fields into a dictionary
         all_inputs = ModelParams(
             state=state,
-            cl=cl,
-            ca=ca,
-            k=k,
             district=district,
+            latitude=latitude,
+            longitude=longitude,
             ph=ph,
             ec=ec,
-            longitude=longitude,
             co3=co3,
             hco3=hco3,
-            latitude=latitude,
+            cl=cl,
             so4=so4,
             no3=no3,
             po4=po4,
             th=th,
-            hardness=hardness,
+            ca=ca,
             mg=mg,
             na=na,
+            k=k,
             f=f,
             sio2=sio2,
             tds=tds,
+            hardness=hardness,
         )
 
         # Display the collected inputs dictionary

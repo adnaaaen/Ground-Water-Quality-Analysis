@@ -1,16 +1,6 @@
-from dataclasses import dataclass
+from config import DISTRICT_ENCODER
 
 
-@dataclass
-class User:
-    age: int
-    name: str
+district = "Malappuram"
 
-
-def foo(new: User):
-    print(f"hai, {new.name} you're {new.age} year old")
-
-parm = User(age=19, name="Adnan")
-foo(parm)
-
-
+print(DISTRICT_ENCODER[district])
