@@ -160,4 +160,7 @@ with st.form("model-prediction"):
 
         with st.status("Predicting water quality...", expanded=True) as status:
             sleep(2)
-            status.update(label=f"The water with these quality is :{color}[{prediction}]", expanded=False)
+            status.update(
+                label=f"This water quality level is classified as :{color}[{prediction}]",
+                expanded=False,
+            )

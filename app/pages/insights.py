@@ -1,6 +1,7 @@
 import numpy as np
 import streamlit as st
 import plotly.express as px
+from streamlit.components import v1 as component
 
 st.set_page_config(
     page_title="Insights | Water Quality ",
@@ -107,7 +108,7 @@ cols[3].metric(
 st.write("")
 st.write("")
 st.write("")
-tab1, tab2 = st.tabs(["Analysis", "Corelation"])
+tab1, tab2, tab3 = st.tabs(["Analysis", "Corelation", "Report"])
 
 with tab1:
     col1, col2 = st.columns(2)
@@ -137,3 +138,17 @@ with tab2:
     )
     corr_fig = px.imshow(helper.df[seleted_cols].corr(), text_auto=True)
     st.plotly_chart(corr_fig)
+
+with tab3:
+    profile_html_path = helper.generate_df_report()
+    with open(profile_html_path) as f:
+        html_content = f.read()
+    st.download_button(
+        label="Download Report as HTML",
+        data=html_content,
+        file_name="report.html",
+        mime="text/csv",
+        icon=":material/download:",
+    )
+    st.header("Auto Generated Profile Report")
+    component.html(html_content, height=13500)

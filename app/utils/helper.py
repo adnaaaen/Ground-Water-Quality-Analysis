@@ -1,8 +1,10 @@
+import os
 from typing import Any
 import pandas as pd
 import numpy as np
 import streamlit as st
-from .config import DF_PATH
+from .config import DF_PATH, PROJECT_DIR
+from ydata_profiling import ProfileReport
 
 
 def create_sidebar() -> list:
@@ -63,3 +65,16 @@ def get_normal_num(column: str) -> float:
     _mean = df[column].mean()
     _std = df[column].std()
     return round(np.random.normal(_mean, _std), 5)
+
+
+@st.cache_data
+def generate_df_report() -> Any:
+    path_to_html = os.path.join(PROJECT_DIR, "app/utils/static/report.html")
+    if os.path.exists(path_to_html):
+        print("the report is already generated")
+        return path_to_html
+    df = get_df("preprocessed.csv")
+    profile = ProfileReport(df)
+    profile.to_file(path_to_html)
+    print(f"Report file saved in {path_to_html}")
+    return path_to_html

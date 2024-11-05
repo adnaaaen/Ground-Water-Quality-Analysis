@@ -17,6 +17,10 @@ with st.sidebar:
 
 
 st.markdown("# **GROUND WATER QUALITY ANALYSIS**")
+st.markdown(":material/engineering: Developed by **[Adnan](https://www.linkedin.com/in/adnaaaen/)**")
+st.markdown(
+    ":material/code: [Source Code](https://github.com/adnaaaen/Ground-Water-Quality-Analysis.git)"
+)
 st.divider()
 
 
@@ -67,6 +71,3 @@ with three:
         value=len(df.select_dtypes(include=np.number).columns),
     )
     st.metric(label="No.of Districts", value=df["DISTRICT"].nunique())
-
-
-st.caption("**Created by Adnan**")
