@@ -60,29 +60,30 @@ if is_random_data:
     )
 
     st.session_state.hardness = helper.get_random_category("HARDNESS")
-    st.session_state.ph = helper.get_random_num(4.36, 9.73)
-    st.session_state.ec = helper.get_random_num(0.0, 5480.0)
 
-    st.session_state.co3 = helper.get_random_num(0.0, 104.0)
-    st.session_state.hco3 = helper.get_random_num(0.0, 1464.0)
+    st.session_state.ph = helper.get_normal_num("pH")
+    st.session_state.ec = helper.get_normal_num("EC")
 
-    st.session_state.cl = helper.get_random_num(0.0, 1156.0)
-    st.session_state.so4 = helper.get_random_num(0.0, 547.0)
+    st.session_state.co3 = helper.get_normal_num("CO3")
+    st.session_state.hco3 = helper.get_normal_num("HCO3")
 
-    st.session_state.no3 = helper.get_random_num(0.0, 264.0)
-    st.session_state.po4 = helper.get_random_num(0.0, 0.240)
+    st.session_state.cl = helper.get_normal_num("Cl")
+    st.session_state.so4 = helper.get_normal_num("SO4")
 
-    st.session_state.th = helper.get_random_num(0.0, 1600.0)
-    st.session_state.ca = helper.get_random_num(0.0, 337.0)
+    st.session_state.no3 = helper.get_normal_num("NO3")
+    st.session_state.po4 = helper.get_normal_num("PO4")
 
-    st.session_state.mg = helper.get_random_num(-23.0, 222.0)
-    st.session_state.na = helper.get_random_num(0.0, 763.0)
+    st.session_state.th = helper.get_normal_num("TH")
+    st.session_state.ca = helper.get_normal_num("Ca")
 
-    st.session_state.k = helper.get_random_num(0.0, 68.87)
-    st.session_state.f = helper.get_random_num(0.0, 3.9)
+    st.session_state.mg = helper.get_normal_num("Mg")
+    st.session_state.na = helper.get_normal_num("Na")
 
-    st.session_state.sio2 = helper.get_random_num(0.0, 82.0)
-    st.session_state.tds = helper.get_random_num(0.0, 2301.0)
+    st.session_state.k = helper.get_normal_num("K")
+    st.session_state.f = helper.get_normal_num("F")
+
+    st.session_state.sio2 = helper.get_normal_num("SiO2")
+    st.session_state.tds = helper.get_normal_num("TDS")
 
 
 with st.form("model-prediction"):
@@ -154,15 +155,9 @@ with st.form("model-prediction"):
         )
 
         # Display the collected inputs dictionary
-        st.write("All Inputs:", all_inputs)
 
-        predict(all_inputs)
+        prediction, color = predict(all_inputs)
 
         with st.status("Predicting water quality...", expanded=True) as status:
-            st.write("transforming data...")
             sleep(2)
-            st.write("predicting quality...")
-            sleep(3)
-            st.write("evaluating prediction...")
-            sleep(3)
-            status.update(label="Prediction Successful", expanded=False)
+            status.update(label=f"The water with these quality is :{color}[{prediction}]", expanded=False)

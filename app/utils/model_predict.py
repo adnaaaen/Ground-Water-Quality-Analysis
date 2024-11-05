@@ -55,36 +55,21 @@ def predict(params: ModelParams) -> Any:
     _state = list_values[0]
     _district = list_values[1]
     _hardness = list_values[-1]
-    print(_state)
-    print(_district)
-    print(_hardness)
-
-    print("Default Values: ")
-    print(list_values)
 
     list_values[0], list_values[1], list_values[-1] = label_encode(
         _state, _district, _hardness
     )
 
-    print("Encoded Values: ")
-    print(list_values)
-
     np_array = np.array(list_values)
 
     scaled_values = STANDARD_SCALER.transform(np_array.reshape(1, -1))
 
-    print("Scaled Values: ")
-    print(scaled_values)
-
     df_x = pd.DataFrame(scaled_values, columns=df.columns[:-1])
     y_pred = MODEL.predict(df_x)[0]
-    print(y_pred)
 
     if y_pred == 0:
-        print("Moderately Safe")
+        return ("Moderately Safe", "blue")
     elif y_pred == 1:
-        # return "Safe"
-        print("Safe")
+        return ("Safe", "green")
     elif y_pred == 2:
-        # return "Unsafe"
-        print("Unsafe")
+        return ("Unsafe", "red")

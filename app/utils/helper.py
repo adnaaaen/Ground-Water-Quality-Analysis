@@ -59,10 +59,7 @@ def get_random_district_by_state(state: str) -> str:
     return str(np.random.choice(list(STATE[state])))
 
 
-def get_random_num(start: float, end: float) -> float:
-    return round(np.random.uniform(start * 1.05, end * 0.95), 5)
-
 def get_normal_num(column: str) -> float:
     _mean = df[column].mean()
-    _std = df[column].sd()
+    _std = df[column].std()
     return round(np.random.normal(_mean, _std), 5)
