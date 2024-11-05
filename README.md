@@ -63,5 +63,6 @@ black .
 
 ## Screenshot
 
-![Untitled design (1)](https://github.com/user-attachments/assets/0a3bb765-dd37-48fd-a455-8127f42b0802)
+
+![Untitled design (2)](https://github.com/user-attachments/assets/0e942071-95db-4f42-bad2-61cc7b1f7dc5)
 
