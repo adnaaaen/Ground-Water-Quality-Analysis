@@ -48,7 +48,8 @@ The **Ground Water Quality Analysis** project aims to assess and predict water q
 
 - Run the Streamlit application:
    ```bash
-   streamlit run app/main.py
+   cd app
+   streamlit run main.py
    ```
 
 ## Formatting
