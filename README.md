@@ -1,5 +1,5 @@
  
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=40&duration=3000&pause=1000&color=FFFFFF&multiline=true&repeat=false&width=750&height=100&lines=Water+Quality+Prediction:;+An+End-to-End+ML+Application)]()
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=40&duration=3000&pause=5000&color=FFFFFF&multiline=false&repeat=true&width=750&height=100&lines=Water+Quality+Prediction:;+An+End-to-End+ML+Application)]()
 
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white&border-radius=10)
 ![Scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white&border-radius=10)
