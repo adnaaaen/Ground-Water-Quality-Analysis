@@ -1,12 +1,15 @@
  
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=40&duration=3000&pause=1500&color=FFFFFF&multiline=false&repeat=true&width=750&height=100&lines=Water+Quality+Prediction:;+An+End-to-End+ML+Application)]()
 
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white&border-radius=10)
-![Scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white&border-radius=10)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-003B57?style=flat-square&logo=matplotlib&logoColor=white&border-radius=10)
-![Plotly](https://img.shields.io/badge/Plotly-3B4B7F?style=flat-square&logo=plotly&logoColor=white&border-radius=10)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white&border-radius=10)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white&border-radius=10)
+<div align="center">
+
+<a href='https://docs.streamlit.io/' target="_blank"><img alt='' src='https://img.shields.io/badge/streamlit-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=000000&color=000000'/></a>
+<a href='https://scikit-learn.org/stable/getting_started.html' target="_blank"><img alt='' src='https://img.shields.io/badge/scikit_learn-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=000000&color=000000'/></a>
+<a href='https://matplotlib.org/stable/index.html' target="_blank"><img alt='' src='https://img.shields.io/badge/matplotlib-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=000000&color=000000'/></a>
+<a href='https://dash.plotly.com/?_gl=1*jeuit8*_gcl_au*MzQwNDgwMjA2LjE3MzAzMTgxOTk.*_ga*MjE0Mjk4NDM3OC4xNzMwMzE4MjAw*_ga_6G7EE0JNSC*MTczNDM4NzE3NS42LjAuMTczNDM4NzE3NS42MC4wLjA.' target="_blank"><img alt='' src='https://img.shields.io/badge/plotly-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=000000&color=000000'/></a>
+<a href='https://pandas.pydata.org/docs/' target="_blank"><img alt='' src='https://img.shields.io/badge/pandas-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=000000&color=000000'/></a>
+<a href='https://numpy.org/doc/' target="_blank"><img alt='' src='https://img.shields.io/badge/numpy-100000?style=for-the-badge&logo=&logoColor=FFFFFF&labelColor=000000&color=000000'/></a>
+</div>
 
 ## Overview
 
